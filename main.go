@@ -14,8 +14,8 @@ import (
 	"time"
 )
 
-const patternMinLength int = 5
-const numPatterns = 10000 // get randome patterns from dict.txt
+const patternMinLength int = 7
+const numPatterns = 100 // get randome patterns from dict.txt
 
 type algo func(string, string) (int, int)
 type multialgo func(string, []string) (int, int, map[string]int)

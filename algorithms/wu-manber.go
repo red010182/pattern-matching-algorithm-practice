@@ -5,31 +5,26 @@ import (
 	"strings"
 )
 
-const blockSize = 2
-
-func reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-	return string(r)
-}
+const blockSize = 3
 
 func findMinRightMostOccur(sp string, patterns []string) int {
 	var min int = math.MaxInt64
 	for n := 0; n < len(patterns); n++ {
 		pattern := patterns[n]
-		i := strings.Index(reverse(pattern), reverse(sp))
-		if i > -1 {
-			if n == 0 {
-				min = i
-			} else if i < min {
-				min = i
-			}
+		i := strings.LastIndex(pattern, sp)
+		if i == -1 {
+			continue
+		}
+		i = len(pattern) - i - len(sp)
+		if n == 0 {
+			min = i
+		} else if i < min {
+			min = i
 		}
 	}
 	return min
 }
+
 func WuManber(text string, patterns []string) (int, int, map[string]int) {
 	shiftTable := make(map[string]int)
 	lastBlock := make(map[string][]int)
